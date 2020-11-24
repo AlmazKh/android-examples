@@ -1,8 +1,11 @@
-package com.almaz.examples
+package com.almaz.examples.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.almaz.examples.R
+import com.almaz.examples.recycler.ContainerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +19,12 @@ class MainActivity : AppCompatActivity() {
         btn_get_joke.setOnClickListener {
             viewModel.getNewJoke()
         }
+
+        btn_go_to_recycler.setOnClickListener {
+            startActivity(Intent(this, ContainerActivity::class.java))
+            finish()
+        }
+
         observeJokeLiveData()
     }
 
