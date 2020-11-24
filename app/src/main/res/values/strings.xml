@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Examples</string>
     <string name="get_new_joke">Get new joke</string>
+    <string name="go_to_recycler">Go to recycler</string>
 </resources>

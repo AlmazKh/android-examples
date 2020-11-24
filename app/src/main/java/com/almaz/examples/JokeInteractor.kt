@@ -18,4 +18,16 @@ class JokeInteractor {
     fun getNewJoke(): Single<Joke> {
         return Single.fromObservable(api.getRandomJoke())
     }
+
+    fun getJokesList(): Single<List<Joke>> {
+        return Single.just(
+            listOf(
+                Joke("1", "joke 1", 200),
+                Joke("2", "joke 2", 200),
+                Joke("3", "joke 3", 200),
+                Joke("4", "joke 4", 200),
+                Joke("5", "joke 5", 200)
+            )
+        )
+    }
 }
