@@ -3,14 +3,47 @@ package com.almaz.examples.recycler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.almaz.examples.Joke
 import com.almaz.examples.R
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_jokes_list.view.*
 
+
+class JokesListAdapter(private val jokesLambda: (Joke) -> Unit) :
+    RecyclerView.Adapter<JokesListAdapter.JokesViewHolder>() {
+
+    private var jokesList: List<Joke> = listOf()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JokesViewHolder =
+        JokesViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_jokes_list, parent, false)
+        )
+
+    override fun onBindViewHolder(holder: JokesViewHolder, position: Int) {
+        holder.bind(jokesList[position])
+        holder.itemView.setOnClickListener {
+            // это значение при нажатии будет выбрасываться JokesListFragment
+            jokesLambda.invoke(jokesList[position])
+        }
+    }
+
+    override fun getItemCount(): Int = jokesList.size
+
+    fun submitList(list: List<Joke>) {
+        jokesList = list
+    }
+
+    class JokesViewHolder(override val containerView: View) :
+        RecyclerView.ViewHolder(containerView), LayoutContainer {
+        fun bind(joke: Joke) {
+            itemView.tv_joke_id.text = joke.id
+            itemView.tv_joke_text.text = joke.text
+        }
+    }
+}
+
+/*
 class JokesListAdapter(private val jokesLambda: (Joke) -> Unit) :
     ListAdapter<Joke, JokesListAdapter.JokesViewHolder>(JokesDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JokesViewHolder =
@@ -47,3 +80,4 @@ class JokesListAdapter(private val jokesLambda: (Joke) -> Unit) :
         ): Boolean = oldItem == newItem
     }
 }
+*/
