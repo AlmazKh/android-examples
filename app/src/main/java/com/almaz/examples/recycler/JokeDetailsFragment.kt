@@ -19,6 +19,12 @@ class JokeDetailsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /*Принимаем данные, которые мы отправили с помощью метода
+        rootActivity.navController.navigate(
+            R.id.action_jokesListFragment_to_jokeDetailsFragment, bundleOf("joke" to it)
+        )
+        из фрагмента JokesListFragment
+        отправили с ключом "joke" в бандле по этому ключу здесь и вытаскиваем*/
         arguments?.getParcelable<Joke>("joke")?.let {
             tv_joke_id.text = it.id
             tv_joke_text.text = it.text
